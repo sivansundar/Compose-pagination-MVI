@@ -17,25 +17,26 @@
 package android.template.data
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import android.template.data.local.database.MyModel
-import android.template.data.local.database.MyModelDao
+import android.template.data.network.api.UserResponseItem
+import android.template.data.network.data.UsersPagingSource
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import javax.inject.Inject
 
-interface MyModelRepository {
-    val myModels: Flow<List<String>>
+class GitRepository @Inject constructor(
+    private val usersPagingSource: UsersPagingSource) {
 
-    suspend fun add(name: String)
-}
 
-class DefaultMyModelRepository @Inject constructor(
-    private val myModelDao: MyModelDao
-) : MyModelRepository {
 
-    override val myModels: Flow<List<String>> =
-        myModelDao.getMyModels().map { items -> items.map { it.name } }
+    fun getPaginatedUsers(): Flow<PagingData<UserResponseItem>> {
 
-    override suspend fun add(name: String) {
-        myModelDao.insertMyModel(MyModel(name = name))
+        return Pager(
+            config = PagingConfig(
+                10,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { usersPagingSource }
+        ).flow
     }
 }

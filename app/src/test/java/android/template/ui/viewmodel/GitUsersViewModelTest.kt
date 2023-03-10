@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package android.template.data.di
+package android.template.ui.viewmodel
 
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 
-@Module
-@InstallIn(SingletonComponent::class)
-object DataModule {
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+@OptIn(ExperimentalCoroutinesApi::class) // TODO: Remove when stable
+class GitUsersViewModelTest {
 
 }
