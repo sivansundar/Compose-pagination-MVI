@@ -34,7 +34,8 @@ class GitRepository @Inject constructor(
         return Pager(
             config = PagingConfig(
                 10,
-                enablePlaceholders = false
+                enablePlaceholders = false,
+                initialLoadSize = 10
             ),
             pagingSourceFactory = { usersPagingSource }
         ).flow

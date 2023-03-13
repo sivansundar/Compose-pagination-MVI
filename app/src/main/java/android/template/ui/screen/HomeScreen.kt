@@ -99,10 +99,10 @@ private fun HomeScreen(data: State<GitAppViewState>) {
                 loadState.refresh is LoadState.Error -> {
                     // Denotes an error which will be shown in the footer.
 
-                    val e = users.loadState.refresh as LoadState.Error
+                    val loadStateError = users.loadState.refresh as LoadState.Error
                     item {
                         ErrorItem(
-                            message = e.error.localizedMessage!!,
+                            message = loadStateError.error.localizedMessage!!,
                             modifier = Modifier.fillParentMaxSize(),
                             onClickRetry = { retry() }
                         )
